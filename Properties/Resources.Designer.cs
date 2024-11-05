@@ -563,6 +563,56 @@ namespace Rez_Lab.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap фоторез_прояв {
+            get {
+                object obj = ResourceManager.GetObject("фоторез прояв", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap фоторез_прояв1 {
+            get {
+                object obj = ResourceManager.GetObject("фоторез прояв1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap фоторез_прояв11 {
+            get {
+                object obj = ResourceManager.GetObject("фоторез прояв11", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap фоторез_прояв2 {
+            get {
+                object obj = ResourceManager.GetObject("фоторез прояв2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap фоторез_прояв3 {
+            get {
+                object obj = ResourceManager.GetObject("фоторез прояв3", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap фоторез_ульт {
             get {
                 object obj = ResourceManager.GetObject("фоторез ульт", resourceCulture);

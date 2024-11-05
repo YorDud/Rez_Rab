@@ -121,8 +121,14 @@
   <data name="Cleaner" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Cleaner.PNG;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="маск ульт" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\маск ульт.PNG;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="sens 3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\sens 3.PNG;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Хим кис оч" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Хим кис оч.PNG;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="фоторез прояв1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\фоторез прояв1.PNG;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="хим декапир" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\хим декапир.PNG;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -130,8 +136,8 @@
   <data name="predmet2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\predmet2.PNG;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="пал ку эл" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\пал ку эл.PNG;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="трав под мг" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\трав под мг.PNG;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="пал кис оч" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\пал кис оч.PNG;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -144,6 +150,12 @@
   </data>
   <data name="BH микротр 1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\BH микротр 1.PNG;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="мг дек сн" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\мг дек сн.PNG;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="фоторез прояв3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\фоторез прояв3.PNG;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="rz" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\img\rz.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -166,17 +178,14 @@
   <data name="CUel12" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\CUel12.PNG;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="mask prov" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\mask prov.PNG;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="predne" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\predne.PNG;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="трав под пал" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\трав под пал.PNG;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="мг дек ку" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\мг дек ку.PNG;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="фоторез прояв" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\фоторез прояв.PNG;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="мг кис оч" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\мг кис оч.PNG;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -202,23 +211,23 @@
   <data name="лужен" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\лужен.PNG;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="пал ку эл" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\пал ку эл.PNG;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="netr" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\netr.PNG;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="metal" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\metal.PNG;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="фоторез прояв2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\фоторез прояв2.PNG;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="sens 11" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\sens 11.PNG;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="BHC 1012 1022" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BHC 1012 1022.PNG;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="sens 2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\sens 2.PNG;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Info_Simple1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\img\Info_Simple.svg.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="пал микротрав" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\пал микротрав.PNG;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="BAK" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\BAK.PNG;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -229,14 +238,17 @@
   <data name="predmet1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\predmet1.PNG;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="мг дек ку" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\мг дек ку.PNG;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="трав 2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\трав 2.PNG;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="cond" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\cond.PNG;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="мг микротрав" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\мг микротрав.PNG;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="пал микротрав" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\пал микротрав.PNG;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Info_Simple.svg" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\img\Info_Simple.svg.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -250,11 +262,11 @@
   <data name="CUel34" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\CUel34.PNG;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="мг дек сн" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\мг дек сн.PNG;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="mask prov" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\mask prov.PNG;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="трав под мг" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\трав под мг.PNG;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="маск ульт" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\маск ульт.PNG;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="BAK 2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\BAK 2.PNG;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -262,8 +274,11 @@
   <data name="ras okis 2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ras okis 2.PNG;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="BHC 1012 1022" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\BHC 1012 1022.PNG;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="фоторез ульт" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\фоторез ульт.PNG;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="мг микротрав" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\мг микротрав.PNG;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="пал дек ку" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\пал дек ку.PNG;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -271,13 +286,13 @@
   <data name="пал дек сн" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\пал дек сн.PNG;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="sens 3" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\sens 3.PNG;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="sens 11" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\sens 11.PNG;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Хим кис оч" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Хим кис оч.PNG;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="metal" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\metal.PNG;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="фоторез ульт" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\фоторез ульт.PNG;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="фоторез прояв11" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\фоторез прояв11.PNG;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

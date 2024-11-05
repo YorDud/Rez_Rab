@@ -3104,5 +3104,20 @@
   <ItemGroup>
     <None Include="Resources\фоторез ульт.PNG" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\фоторез прояв.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\фоторез прояв1.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\фоторез прояв2.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\фоторез прояв3.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\фоторез прояв11.PNG" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
