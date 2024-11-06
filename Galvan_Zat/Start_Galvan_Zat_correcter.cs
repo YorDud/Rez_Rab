@@ -1984,6 +1984,8 @@ AND (
 
 
 		private DataSet dataSet;
+		private List<string> filteredTableHeaders = new List<string>();
+		private System.Drawing.Font dateFont = new System.Drawing.Font("Arial", 14, FontStyle.Bold);
 		private readonly string[] tableHeaders = new string[]
 		{
 		"!!! Декапир Сu !!!",
@@ -2039,7 +2041,7 @@ AND (
             FROM 
                 Galvan_Zat_CuEl12
             WHERE 
-                ([Сompleted] IS NULL OR [Сompleted] = '') 
+                ([Сompleted] IS NULL OR [Сompleted] = '') and ([Gal_Zat_2_Correction_Mat] <> 'NaCl' or [Gal_Zat_2_Correction_Mat] is null)
                 AND (
                     ([Gal_Zat_2_Correction_Mat] IS NOT NULL AND [Gal_Zat_2_Correction_Mat] <> '') 
                     OR ([Сomment] IS NOT NULL AND [Сomment] <> '') OR ([Gal_Zat_2_Correction_Score] IS NOT NULL AND [Gal_Zat_2_Correction_Score] <> '')
@@ -2052,7 +2054,7 @@ AND (
             FROM 
                 Galvan_Zat_CuEl34
             WHERE 
-                ([Сompleted] IS NULL OR [Сompleted] = '') 
+                ([Сompleted] IS NULL OR [Сompleted] = '') and ([Gal_Zat_3_Correction_Mat] <> 'NaCl' or [Gal_Zat_3_Correction_Mat] is null)
                 AND (
                     ([Gal_Zat_3_Correction_Mat] IS NOT NULL AND [Gal_Zat_3_Correction_Mat] <> '') 
                     OR ([Сomment] IS NOT NULL AND [Сomment] <> '') OR ([Gal_Zat_3_Correction_Score] IS NOT NULL AND [Gal_Zat_3_Correction_Score] <> '')
@@ -2067,59 +2069,71 @@ AND (
 				adapter.Fill(ds);
 			}
 
+			// Очищаем список заголовков и добавляем заголовки только для непустых таблиц
+			filteredTableHeaders.Clear();
+			for (int i = ds.Tables.Count - 1; i >= 0; i--)
+			{
+				if (ds.Tables[i].Rows.Count == 0)
+				{
+					ds.Tables.RemoveAt(i);
+				}
+				else
+				{
+					// Добавляем соответствующий заголовок в filteredTableHeaders
+					if (i < tableHeaders.Length)
+					{
+						filteredTableHeaders.Insert(0, tableHeaders[i]);
+					}
+					else
+					{
+						filteredTableHeaders.Insert(0, $"Таблица {i + 1}");
+					}
+				}
+			}
+
 			return ds;
 		}
 
-		private Font dateFont = new Font("Arial", 14, FontStyle.Bold);
+
 		private void PrintDocument_PrintPage(object sender, PrintPageEventArgs e)
 		{
 			float yPos = e.MarginBounds.Top;
 			float leftMargin = e.MarginBounds.Left;
 			float lineHeight = e.Graphics.MeasureString("Sample", dataFont).Height;
 
-
 			string currentDateTime = DateTime.Now.ToString("dd.MM.yyyy HH:mm");
-
-			// Измеряем размер строки даты и времени
-			SizeF dateSize = e.Graphics.MeasureString(currentDateTime, dateFont);
-
-			// Вычисляем координату X для центра (центр области печати минус половина ширины строки)
+			SizeF dateSize = e.Graphics.MeasureString(currentDateTime, dataFont);
 			float dateX = leftMargin + (e.MarginBounds.Width - dateSize.Width) / 2;
-
-			// Рисуем строку даты и времени по рассчитанной позиции
-			e.Graphics.DrawString(currentDateTime, dateFont, Brushes.Black, dateX, yPos);
-
-			// Обновляем yPos с учетом высоты строки и отступа
+			e.Graphics.DrawString(currentDateTime, dataFont, Brushes.Black, dateX, yPos);
 			yPos += dateFont.GetHeight(e.Graphics) + 10;
 
-
-			// 1. Печать заголовка "MENYAY" по центру верхней части страницы
 			string title = "Гальваническая затяжка";
 			SizeF titleSize = e.Graphics.MeasureString(title, titleFont);
 			float titleX = leftMargin + (e.MarginBounds.Width - titleSize.Width) / 2;
 			e.Graphics.DrawString(title, titleFont, Brushes.Black, titleX, yPos);
-			yPos += titleSize.Height + 20; // Отступ после заголовка
+			yPos += titleSize.Height + 20;
 
 			float rowSpacing = 8.0f;
-			// Объект StringFormat с настройками переноса текста
-			StringFormat stringFormat = new StringFormat();
-			stringFormat.Trimming = StringTrimming.Word; // Обрезка по словам
-			stringFormat.FormatFlags = StringFormatFlags.LineLimit; // Ограничение числа строк
+			StringFormat stringFormat = new StringFormat
+			{
+				Trimming = StringTrimming.Word,
+				FormatFlags = StringFormatFlags.LineLimit
+			};
 
 			while (currentTableIndex < dataSet.Tables.Count)
 			{
 				System.Data.DataTable table = dataSet.Tables[currentTableIndex];
-				string header = tableHeaders.Length > currentTableIndex ? tableHeaders[currentTableIndex] : $"Таблица {currentTableIndex + 1}";
+
+				// Получаем соответствующий заголовок из filteredTableHeaders
+				string header = filteredTableHeaders.Count > currentTableIndex ? filteredTableHeaders[currentTableIndex] : $"Таблица {currentTableIndex + 1}";
 
 				// Печать заголовка таблицы
 				e.Graphics.DrawString(header, headerFont, Brushes.Black, leftMargin, yPos, stringFormat);
 				yPos += lineHeight + 5;
 
-				// Пользовательские названия столбцов
 				string[] customColumnNames = { "Корр. Материал", "Корр. Количество", "Комментарии" };
 				float currentLeft = leftMargin;
 
-				// Печать заголовков столбцов
 				for (int i = 0; i < customColumnNames.Length; i++)
 				{
 					RectangleF headerRect = new RectangleF(currentLeft, yPos, columnWidths[i], lineHeight);
@@ -2128,20 +2142,16 @@ AND (
 				}
 				yPos += lineHeight;
 
-				// Печать строк данных
 				while (currentRowIndex < table.Rows.Count)
 				{
 					DataRow row = table.Rows[currentRowIndex];
 					currentLeft = leftMargin;
-
-					// Определяем максимальную высоту для текущей строки
 					float maxHeight = 0;
 					SizeF[] sizes = new SizeF[customColumnNames.Length];
 
 					for (int i = 0; i < customColumnNames.Length; i++)
 					{
 						string text = row[i]?.ToString() ?? string.Empty;
-						// Вычисляем размер текста с учетом переноса
 						sizes[i] = e.Graphics.MeasureString(text, dataFont, (int)columnWidths[i], stringFormat);
 						if (sizes[i].Height > maxHeight)
 						{
@@ -2149,14 +2159,12 @@ AND (
 						}
 					}
 
-					// Проверка границ страницы перед печатью строки
 					if (yPos + maxHeight > e.MarginBounds.Bottom)
 					{
 						e.HasMorePages = true;
 						return;
 					}
 
-					// Печать каждой ячейки в строке с переносом текста
 					for (int i = 0; i < customColumnNames.Length; i++)
 					{
 						string text = row[i]?.ToString() ?? string.Empty;
@@ -2165,17 +2173,14 @@ AND (
 						currentLeft += columnWidths[i];
 					}
 
-					// Увеличиваем yPos на высоту строки плюс отступ
 					yPos += maxHeight + rowSpacing;
 					currentRowIndex++;
 				}
 
-				// Завершение текущей таблицы
 				currentRowIndex = 0;
 				currentTableIndex++;
-				yPos += lineHeight; // Пустая строка между таблицами
+				yPos += lineHeight;
 
-				// Проверка границ страницы после добавления пустой строки
 				if (yPos + lineHeight > e.MarginBounds.Bottom)
 				{
 					e.HasMorePages = true;
@@ -2183,10 +2188,7 @@ AND (
 				}
 			}
 
-			// Все таблицы напечатаны
 			e.HasMorePages = false;
-
-			// Сброс индексов для следующей печати
 			currentTableIndex = 0;
 			currentRowIndex = 0;
 		}
@@ -2194,73 +2196,71 @@ AND (
 
 
 
-	
-
-	//private void button1_Click_1(object sender, EventArgs e)
-	//{
-	//	this.Hide();
-	//	Galvan_Zat_KisOch_Corrector tmc = new Galvan_Zat_KisOch_Corrector();
-	//	tmc.ShowDialog();
-	//	this.Show();
-	//}
-
-	//private void button4_Click_2(object sender, EventArgs e)
-	//{
-	//	this.Hide();
-	//	Galvan_Zat_Microtrav_Corrector tmc = new Galvan_Zat_Microtrav_Corrector();
-	//	tmc.ShowDialog();
-	//	this.Show();
-	//}
-
-	//private void button5_Click_2(object sender, EventArgs e)
-	//{
-	//	this.Hide();
-	//	Galvan_Zat_Cu_Corrector tmc = new Galvan_Zat_Cu_Corrector();
-	//	tmc.ShowDialog();
-	//	this.Show();
-	//}
-
-	//private void button6_Click_2(object sender, EventArgs e)
-	//{
-	//	this.Hide();
-	//	Galvan_Zat_Sn_Corrector tmc = new Galvan_Zat_Sn_Corrector();
-	//	tmc.ShowDialog();
-	//	this.Show();
-	//}
-
-	//private void button7_Click_2(object sender, EventArgs e)
-	//{
-	//	this.Hide();
-	//	Galvan_Zat_CuEl1920_Corrector tmc = new Galvan_Zat_CuEl1920_Corrector();
-	//	tmc.ShowDialog();
-	//	this.Show();
-	//}
-
-	//private void button8_Click_2(object sender, EventArgs e)
-	//{
-	//	this.Hide();
-	//	Galvan_Zat_CuEl2122_Corrector tmc = new Galvan_Zat_CuEl2122_Corrector();
-	//	tmc.ShowDialog();
-	//	this.Show();
-	//}
-
-	//private void button9_Click_2(object sender, EventArgs e)
-	//{
-	//	this.Hide();
-	//	Galvan_Zat_SnEl_Corrector tmc = new Galvan_Zat_SnEl_Corrector();
-	//	tmc.ShowDialog();
-	//	this.Show();
-	//}
-
-	//private void button2_Click_2(object sender, EventArgs e)
-	//{
-	//	this.Hide();
-	//	Galvan_Zat_CuEl2324_Corrector tmc = new Galvan_Zat_CuEl2324_Corrector();
-	//	tmc.ShowDialog();
-	//	this.Show();
-	//}
 
 
+		//private void button1_Click_1(object sender, EventArgs e)
+		//{
+		//	this.Hide();
+		//	Galvan_Zat_KisOch_Corrector tmc = new Galvan_Zat_KisOch_Corrector();
+		//	tmc.ShowDialog();
+		//	this.Show();
+		//}
+
+		//private void button4_Click_2(object sender, EventArgs e)
+		//{
+		//	this.Hide();
+		//	Galvan_Zat_Microtrav_Corrector tmc = new Galvan_Zat_Microtrav_Corrector();
+		//	tmc.ShowDialog();
+		//	this.Show();
+		//}
+
+		//private void button5_Click_2(object sender, EventArgs e)
+		//{
+		//	this.Hide();
+		//	Galvan_Zat_Cu_Corrector tmc = new Galvan_Zat_Cu_Corrector();
+		//	tmc.ShowDialog();
+		//	this.Show();
+		//}
+
+		//private void button6_Click_2(object sender, EventArgs e)
+		//{
+		//	this.Hide();
+		//	Galvan_Zat_Sn_Corrector tmc = new Galvan_Zat_Sn_Corrector();
+		//	tmc.ShowDialog();
+		//	this.Show();
+		//}
+
+		//private void button7_Click_2(object sender, EventArgs e)
+		//{
+		//	this.Hide();
+		//	Galvan_Zat_CuEl1920_Corrector tmc = new Galvan_Zat_CuEl1920_Corrector();
+		//	tmc.ShowDialog();
+		//	this.Show();
+		//}
+
+		//private void button8_Click_2(object sender, EventArgs e)
+		//{
+		//	this.Hide();
+		//	Galvan_Zat_CuEl2122_Corrector tmc = new Galvan_Zat_CuEl2122_Corrector();
+		//	tmc.ShowDialog();
+		//	this.Show();
+		//}
+
+		//private void button9_Click_2(object sender, EventArgs e)
+		//{
+		//	this.Hide();
+		//	Galvan_Zat_SnEl_Corrector tmc = new Galvan_Zat_SnEl_Corrector();
+		//	tmc.ShowDialog();
+		//	this.Show();
+		//}
+
+		//private void button2_Click_2(object sender, EventArgs e)
+		//{
+		//	this.Hide();
+		//	Galvan_Zat_CuEl2324_Corrector tmc = new Galvan_Zat_CuEl2324_Corrector();
+		//	tmc.ShowDialog();
+		//	this.Show();
+		//}
 
 
 
@@ -2271,8 +2271,10 @@ AND (
 
 
 
-	// Обработка изменения текста меток
 
-}
+
+		// Обработка изменения текста меток
+
+	}
 }
 

@@ -572,6 +572,14 @@ HighlightEmptyCells(dataGridView1, columnsToCheck);
 				connection.Open();
 				adapter.Fill(ds);
 			}
+			// Фильтрация пустых таблиц
+			//for (int i = ds.Tables.Count - 1; i >= 0; i--)
+			//{
+			//	if (ds.Tables[i].Rows.Count == 0)
+			//	{
+			//		ds.Tables.RemoveAt(i);
+			//	}
+			//}
 
 			return ds;
 		}

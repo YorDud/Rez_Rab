@@ -2473,6 +2473,8 @@ AND (
 
 
 		private DataSet dataSet;
+		private List<string> filteredTableHeaders = new List<string>();
+		private System.Drawing.Font dateFont = new System.Drawing.Font("Arial", 14, FontStyle.Bold);
 		private readonly string[] tableHeaders = new string[]
 		{
 		"!!! Кислая очистка !!!",
@@ -2481,7 +2483,7 @@ AND (
 		"!!! Декапир Sn !!!",
 		"!!! Cu электролит (ванна 19-20) !!!",
 		"!!! Cu электролит (ванна 21-22) !!!",
-		"!!! Cu электролит (ванна 23-24)v",
+		"!!! Cu электролит (ванна 23-24) !!!",
 		"!!! Sn электролит !!!",
 		"!!! Травление подвесок !!!"
 		};
@@ -2573,7 +2575,7 @@ SELECT
             FROM 
                 Galvan_Line_PAL_CuEl1920
             WHERE 
-                ([Сompleted] IS NULL OR [Сompleted] = '') 
+                ([Сompleted] IS NULL OR [Сompleted] = '')  and ([Gal_Line_4_Correction_Mat] <> 'NaCl' or [Gal_Line_4_Correction_Mat] is null)
                 AND (
                     ([Gal_Line_4_Correction_Mat] IS NOT NULL AND [Gal_Line_4_Correction_Mat] <> '') 
                     OR ([Сomment] IS NOT NULL AND [Сomment] <> '') OR ([Gal_Line_4_Correction_Score] IS NOT NULL AND [Gal_Line_4_Correction_Score] <> '')
@@ -2586,7 +2588,7 @@ SELECT
             FROM 
                 Galvan_Line_PAL_CuEl2122
             WHERE 
-                ([Сompleted] IS NULL OR [Сompleted] = '') 
+                ([Сompleted] IS NULL OR [Сompleted] = '')  and ([Gal_Line_5_Correction_Mat] <> 'NaCl' or [Gal_Line_5_Correction_Mat] is null)
                 AND (
                     ([Gal_Line_5_Correction_Mat] IS NOT NULL AND [Gal_Line_5_Correction_Mat] <> '') 
                     OR ([Сomment] IS NOT NULL AND [Сomment] <> '') OR ([Gal_Line_5_Correction_Score] IS NOT NULL AND [Gal_Line_5_Correction_Score] <> '')
@@ -2598,7 +2600,7 @@ SELECT
             FROM 
                 Galvan_Line_PAL_CuEl2324
             WHERE 
-                ([Сompleted] IS NULL OR [Сompleted] = '') 
+                ([Сompleted] IS NULL OR [Сompleted] = '')  and ([Gal_Line_6_Correction_Mat] <> 'NaCl' or [Gal_Line_6_Correction_Mat] is null)
                 AND (
                     ([Gal_Line_6_Correction_Mat] IS NOT NULL AND [Gal_Line_6_Correction_Mat] <> '') 
                     OR ([Сomment] IS NOT NULL AND [Сomment] <> '') OR ([Gal_Line_6_Correction_Score] IS NOT NULL AND [Gal_Line_6_Correction_Score] <> '')
@@ -2611,7 +2613,7 @@ SELECT
             FROM 
                 Galvan_Line_PAL_SnEl
             WHERE 
-                ([Сompleted] IS NULL OR [Сompleted] = '') 
+                ([Сompleted] IS NULL OR [Сompleted] = '')  and ([Gal_Line_7_Correction_Mat] <> 'NaCl' or [Gal_Line_7_Correction_Mat] is null)
                 AND (
                     ([Gal_Line_7_Correction_Mat] IS NOT NULL AND [Gal_Line_7_Correction_Mat] <> '') 
                     OR ([Сomment] IS NOT NULL AND [Сomment] <> '') OR ([Gal_Line_7_Correction_Score] IS NOT NULL AND [Gal_Line_7_Correction_Score] <> '')
@@ -2638,59 +2640,71 @@ SELECT
 				adapter.Fill(ds);
 			}
 
+			// Очищаем список заголовков и добавляем заголовки только для непустых таблиц
+			filteredTableHeaders.Clear();
+			for (int i = ds.Tables.Count - 1; i >= 0; i--)
+			{
+				if (ds.Tables[i].Rows.Count == 0)
+				{
+					ds.Tables.RemoveAt(i);
+				}
+				else
+				{
+					// Добавляем соответствующий заголовок в filteredTableHeaders
+					if (i < tableHeaders.Length)
+					{
+						filteredTableHeaders.Insert(0, tableHeaders[i]);
+					}
+					else
+					{
+						filteredTableHeaders.Insert(0, $"Таблица {i + 1}");
+					}
+				}
+			}
+
 			return ds;
 		}
 
-		private Font dateFont = new Font("Arial", 14, FontStyle.Bold);
+
 		private void PrintDocument_PrintPage(object sender, PrintPageEventArgs e)
 		{
 			float yPos = e.MarginBounds.Top;
 			float leftMargin = e.MarginBounds.Left;
 			float lineHeight = e.Graphics.MeasureString("Sample", dataFont).Height;
 
-
 			string currentDateTime = DateTime.Now.ToString("dd.MM.yyyy HH:mm");
-
-			// Измеряем размер строки даты и времени
-			SizeF dateSize = e.Graphics.MeasureString(currentDateTime, dateFont);
-
-			// Вычисляем координату X для центра (центр области печати минус половина ширины строки)
+			SizeF dateSize = e.Graphics.MeasureString(currentDateTime, dataFont);
 			float dateX = leftMargin + (e.MarginBounds.Width - dateSize.Width) / 2;
-
-			// Рисуем строку даты и времени по рассчитанной позиции
-			e.Graphics.DrawString(currentDateTime, dateFont, Brushes.Black, dateX, yPos);
-
-			// Обновляем yPos с учетом высоты строки и отступа
+			e.Graphics.DrawString(currentDateTime, dataFont, Brushes.Black, dateX, yPos);
 			yPos += dateFont.GetHeight(e.Graphics) + 10;
 
-
-			// 1. Печать заголовка "MENYAY" по центру верхней части страницы
 			string title = "Гальваническая линия 2-рой метализации - PAL";
 			SizeF titleSize = e.Graphics.MeasureString(title, titleFont);
 			float titleX = leftMargin + (e.MarginBounds.Width - titleSize.Width) / 2;
 			e.Graphics.DrawString(title, titleFont, Brushes.Black, titleX, yPos);
-			yPos += titleSize.Height + 20; // Отступ после заголовка
+			yPos += titleSize.Height + 20;
 
 			float rowSpacing = 8.0f;
-			// Объект StringFormat с настройками переноса текста
-			StringFormat stringFormat = new StringFormat();
-			stringFormat.Trimming = StringTrimming.Word; // Обрезка по словам
-			stringFormat.FormatFlags = StringFormatFlags.LineLimit; // Ограничение числа строк
+			StringFormat stringFormat = new StringFormat
+			{
+				Trimming = StringTrimming.Word,
+				FormatFlags = StringFormatFlags.LineLimit
+			};
 
 			while (currentTableIndex < dataSet.Tables.Count)
 			{
 				System.Data.DataTable table = dataSet.Tables[currentTableIndex];
-				string header = tableHeaders.Length > currentTableIndex ? tableHeaders[currentTableIndex] : $"Таблица {currentTableIndex + 1}";
+
+				// Получаем соответствующий заголовок из filteredTableHeaders
+				string header = filteredTableHeaders.Count > currentTableIndex ? filteredTableHeaders[currentTableIndex] : $"Таблица {currentTableIndex + 1}";
 
 				// Печать заголовка таблицы
 				e.Graphics.DrawString(header, headerFont, Brushes.Black, leftMargin, yPos, stringFormat);
 				yPos += lineHeight + 5;
 
-				// Пользовательские названия столбцов
 				string[] customColumnNames = { "Корр. Материал", "Корр. Количество", "Комментарии" };
 				float currentLeft = leftMargin;
 
-				// Печать заголовков столбцов
 				for (int i = 0; i < customColumnNames.Length; i++)
 				{
 					RectangleF headerRect = new RectangleF(currentLeft, yPos, columnWidths[i], lineHeight);
@@ -2699,20 +2713,16 @@ SELECT
 				}
 				yPos += lineHeight;
 
-				// Печать строк данных
 				while (currentRowIndex < table.Rows.Count)
 				{
 					DataRow row = table.Rows[currentRowIndex];
 					currentLeft = leftMargin;
-
-					// Определяем максимальную высоту для текущей строки
 					float maxHeight = 0;
 					SizeF[] sizes = new SizeF[customColumnNames.Length];
 
 					for (int i = 0; i < customColumnNames.Length; i++)
 					{
 						string text = row[i]?.ToString() ?? string.Empty;
-						// Вычисляем размер текста с учетом переноса
 						sizes[i] = e.Graphics.MeasureString(text, dataFont, (int)columnWidths[i], stringFormat);
 						if (sizes[i].Height > maxHeight)
 						{
@@ -2720,14 +2730,12 @@ SELECT
 						}
 					}
 
-					// Проверка границ страницы перед печатью строки
 					if (yPos + maxHeight > e.MarginBounds.Bottom)
 					{
 						e.HasMorePages = true;
 						return;
 					}
 
-					// Печать каждой ячейки в строке с переносом текста
 					for (int i = 0; i < customColumnNames.Length; i++)
 					{
 						string text = row[i]?.ToString() ?? string.Empty;
@@ -2736,17 +2744,14 @@ SELECT
 						currentLeft += columnWidths[i];
 					}
 
-					// Увеличиваем yPos на высоту строки плюс отступ
 					yPos += maxHeight + rowSpacing;
 					currentRowIndex++;
 				}
 
-				// Завершение текущей таблицы
 				currentRowIndex = 0;
 				currentTableIndex++;
-				yPos += lineHeight; // Пустая строка между таблицами
+				yPos += lineHeight;
 
-				// Проверка границ страницы после добавления пустой строки
 				if (yPos + lineHeight > e.MarginBounds.Bottom)
 				{
 					e.HasMorePages = true;
@@ -2754,10 +2759,7 @@ SELECT
 				}
 			}
 
-			// Все таблицы напечатаны
 			e.HasMorePages = false;
-
-			// Сброс индексов для следующей печати
 			currentTableIndex = 0;
 			currentRowIndex = 0;
 		}
