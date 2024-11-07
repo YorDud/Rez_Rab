@@ -9,8 +9,8 @@ namespace Rez_Lab
 {
     public class WC
     {
-        //public static string ConnectionString = "Server=alb-pcb-sql;Database=Lab_Rez;User Id=sa;Password=b^Ax*m>7;";
-        public static string ConnectionString = "Server=localhost\\SQLEXPRESS;Database=master;Trusted_Connection=True;";
+        public static string ConnectionString = "Server=alb-pcb-sql;Database=Lab_Rez;User Id=sa;Password=b^Ax*m>7;";
+        //public static string ConnectionString = "Server=localhost\\SQLEXPRESS;Database=master;Trusted_Connection=True;";
         public static string fio;
         public static string login;
         public static string id_User;
