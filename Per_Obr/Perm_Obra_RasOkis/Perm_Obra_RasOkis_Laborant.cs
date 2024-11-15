@@ -72,11 +72,11 @@ dataGridView1.Columns["Сomment"].HeaderText = "Комментарий";
 
 				dataGridView1.Columns["Per_Obr_2_obshee"].DefaultCellStyle.BackColor = Color.LightBlue;
 				dataGridView1.Columns["Per_Obr_2_avtiv_okis"].DefaultCellStyle.BackColor = Color.LightBlue;
-				dataGridView1.Columns["Per_Obr_2_pokaz_avtiv"].DefaultCellStyle.BackColor = Color.Silver;
+				dataGridView1.Columns["Per_Obr_2_pokaz_avtiv"].DefaultCellStyle.BackColor = Color.DeepSkyBlue;
 				dataGridView1.Columns["Per_Obr_2_plot"].DefaultCellStyle.BackColor = Color.LightBlue;
 				dataGridView1.Columns["Per_Obr_2_NaMnO4"].DefaultCellStyle.BackColor = Color.LightBlue;
-				dataGridView1.Columns["Per_Obr_2_Na2MnO4"].DefaultCellStyle.BackColor = Color.LightBlue;
-				dataGridView1.Columns["Per_Obr_2_402b"].DefaultCellStyle.BackColor = Color.LightBlue;
+				dataGridView1.Columns["Per_Obr_2_Na2MnO4"].DefaultCellStyle.BackColor = Color.DeepSkyBlue;
+				dataGridView1.Columns["Per_Obr_2_402b"].DefaultCellStyle.BackColor = Color.DeepSkyBlue;
 				dataGridView1.Columns["Per_Obr_2_NaOH"].DefaultCellStyle.BackColor = Color.LightBlue;
 
 				foreach (DataGridViewRow row in dataGridView1.Rows)
@@ -1016,6 +1016,18 @@ dataGridView1.Columns["Сomment"].HeaderText = "Комментарий";
 							// Обновление базы данных
 							UpdateDatabase(e.RowIndex, e.ColumnIndex, result, sender, e);
 
+
+
+
+
+							double result2 = Math.Round(result / 0.36, 2);
+
+							dataGridView1.Rows[e.RowIndex].Cells[9].Value = result2;
+
+							// Обновление базы данных
+							UpdateDatabase(e.RowIndex, 9, result2, sender, e);
+
+
 							inputForm.Close();
 						}
 						else
@@ -1139,128 +1151,17 @@ dataGridView1.Columns["Сomment"].HeaderText = "Комментарий";
 							// Обновление базы данных
 							UpdateDatabase(e.RowIndex, e.ColumnIndex, result, sender, e);
 
-							inputForm.Close();
-						}
-						else
-						{
-							MessageBox.Show("Пожалуйста, введите корректные числовые значения.", "Некорректный ввод", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-						}
-					};
-
-					// Добавление элементов на форму
-					inputForm.Controls.Add(value1);
-					inputForm.Controls.Add(labelValue1);
-					inputForm.Controls.Add(labelValueA);
-					inputForm.Controls.Add(labelValue2);
-					inputForm.Controls.Add(value2);
-					inputForm.Controls.Add(labelValue3);
-					inputForm.AcceptButton = calculateButton;
-					inputForm.Controls.Add(calculateButton);
-
-					inputForm.ShowDialog();
-				}
-			}
-			else if (e.RowIndex >= 0 && e.ColumnIndex == 8) // Проверяем, что ячейка выбрана
-			{
-				// Открытие диалогового окна
-				// Открытие диалогового окна
-				using (Form inputForm = new Form())
-				{
-					// Установка размеров формы
-					inputForm.Width = 350;
-					inputForm.Height = 300;
-					inputForm.FormBorderStyle = FormBorderStyle.FixedDialog;
-					inputForm.MaximizeBox = false;
-					inputForm.MinimizeBox = false;
-					inputForm.StartPosition = FormStartPosition.CenterParent;
-					inputForm.Text = "Na2MnO4";
-
-					Label labelValue1 = new Label()
-					{
-						Text = "С(Na2MnO4) = ((E603 * 82.4) - (E526 * 7.34)) * 1.387",
-						Top = 10,
-						Left = 30,
-						Width = 330
-					};
-
-					Label labelValueA = new Label()
-					{
-						Text = "E526 - показание прибора при длине волны 526 нм\r\nE603 - показание прибора при длине волны 603 нм",
-						Top = 40,
-						Left = 10,
-						Width = 330,
-						Height = 100
-					};
-
-					Label labelValue2 = new Label()
-					{
-						Text = "E526:",
-						Top = 150,
-						Left = 10,
-						Width = 100
-					};
 
 
-					// Создание и настройка текстовых полей
-					TextBox value1 = new TextBox
-					{
-						Top = 150,
-						Left = 50,
-						Width = 100
-					};
-					Label labelValue3 = new Label()
-					{
-						Text = "E603:",
-						Top = 180,
-						Left = 10,
-						Width = 100
-					};
 
-					TextBox value2 = new TextBox
-					{
-						Top = 180,
-						Left = 50,
-						Width = 100
-					};
-					Label labelValue4 = new Label()
-					{
-						Text = "V:",
-						Top = 150,
-						Left = 175,
-						Width = 20
-					};
 
-					TextBox value3 = new TextBox
-					{
-						Top = 150,
-						Left = 200,
-						Width = 100
-					};
 
-					// Добавление обработчиков событий для ограничения ввода только числами
-					value1.KeyPress += NumericTextBox_KeyPress;
-					value2.KeyPress += NumericTextBox_KeyPress;
+							double result2 = Math.Round(((v2 * 82.4) - (v1 * 7.34)) * 1.387, 2);
 
-					// Создание и настройка кнопки
-					Button calculateButton = new Button
-					{
-						Text = "Вычислить",
-						Top = 220,
-						Left = 10,
-						Width = 290
-					};
-					calculateButton.Click += (s, args) =>
-					{
-						// Валидация и получение значений
-						if (double.TryParse(value1.Text, out double v1) && double.TryParse(value2.Text, out double v2))
-						{
-							double result = Math.Round(((v2* 82.4) - (v1 * 7.34)) * 1.387, 2); // Пример формулы (сложение)
-
-							// Запись результата в выбранную ячейку
-							dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = result;
+							dataGridView1.Rows[e.RowIndex].Cells[8].Value = result2;
 
 							// Обновление базы данных
-							UpdateDatabase(e.RowIndex, e.ColumnIndex, result, sender, e);
+							UpdateDatabase(e.RowIndex, 8, result2, sender, e);
 
 							inputForm.Close();
 						}
@@ -1283,6 +1184,129 @@ dataGridView1.Columns["Сomment"].HeaderText = "Комментарий";
 					inputForm.ShowDialog();
 				}
 			}
+			//else if (e.RowIndex >= 0 && e.ColumnIndex == 8) // Проверяем, что ячейка выбрана
+			//{
+			//	// Открытие диалогового окна
+			//	// Открытие диалогового окна
+			//	using (Form inputForm = new Form())
+			//	{
+			//		// Установка размеров формы
+			//		inputForm.Width = 350;
+			//		inputForm.Height = 300;
+			//		inputForm.FormBorderStyle = FormBorderStyle.FixedDialog;
+			//		inputForm.MaximizeBox = false;
+			//		inputForm.MinimizeBox = false;
+			//		inputForm.StartPosition = FormStartPosition.CenterParent;
+			//		inputForm.Text = "Na2MnO4";
+
+			//		Label labelValue1 = new Label()
+			//		{
+			//			Text = "С(Na2MnO4) = ((E603 * 82.4) - (E526 * 7.34)) * 1.387",
+			//			Top = 10,
+			//			Left = 30,
+			//			Width = 330
+			//		};
+
+			//		Label labelValueA = new Label()
+			//		{
+			//			Text = "E526 - показание прибора при длине волны 526 нм\r\nE603 - показание прибора при длине волны 603 нм",
+			//			Top = 40,
+			//			Left = 10,
+			//			Width = 330,
+			//			Height = 100
+			//		};
+
+			//		Label labelValue2 = new Label()
+			//		{
+			//			Text = "E526:",
+			//			Top = 150,
+			//			Left = 10,
+			//			Width = 100
+			//		};
+
+
+			//		// Создание и настройка текстовых полей
+			//		TextBox value1 = new TextBox
+			//		{
+			//			Top = 150,
+			//			Left = 50,
+			//			Width = 100
+			//		};
+			//		Label labelValue3 = new Label()
+			//		{
+			//			Text = "E603:",
+			//			Top = 180,
+			//			Left = 10,
+			//			Width = 100
+			//		};
+
+			//		TextBox value2 = new TextBox
+			//		{
+			//			Top = 180,
+			//			Left = 50,
+			//			Width = 100
+			//		};
+			//		Label labelValue4 = new Label()
+			//		{
+			//			Text = "V:",
+			//			Top = 150,
+			//			Left = 175,
+			//			Width = 20
+			//		};
+
+			//		TextBox value3 = new TextBox
+			//		{
+			//			Top = 150,
+			//			Left = 200,
+			//			Width = 100
+			//		};
+
+			//		// Добавление обработчиков событий для ограничения ввода только числами
+			//		value1.KeyPress += NumericTextBox_KeyPress;
+			//		value2.KeyPress += NumericTextBox_KeyPress;
+
+			//		// Создание и настройка кнопки
+			//		Button calculateButton = new Button
+			//		{
+			//			Text = "Вычислить",
+			//			Top = 220,
+			//			Left = 10,
+			//			Width = 290
+			//		};
+			//		calculateButton.Click += (s, args) =>
+			//		{
+			//			// Валидация и получение значений
+			//			if (double.TryParse(value1.Text, out double v1) && double.TryParse(value2.Text, out double v2))
+			//			{
+			//				double result = Math.Round(((v2* 82.4) - (v1 * 7.34)) * 1.387, 2); // Пример формулы (сложение)
+
+			//				// Запись результата в выбранную ячейку
+			//				dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = result;
+
+			//				// Обновление базы данных
+			//				UpdateDatabase(e.RowIndex, e.ColumnIndex, result, sender, e);
+
+			//				inputForm.Close();
+			//			}
+			//			else
+			//			{
+			//				MessageBox.Show("Пожалуйста, введите корректные числовые значения.", "Некорректный ввод", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+			//			}
+			//		};
+
+			//		// Добавление элементов на форму
+			//		inputForm.Controls.Add(value1);
+			//		inputForm.Controls.Add(labelValue1);
+			//		inputForm.Controls.Add(labelValueA);
+			//		inputForm.Controls.Add(labelValue2);
+			//		inputForm.Controls.Add(value2);
+			//		inputForm.Controls.Add(labelValue3);
+			//		inputForm.AcceptButton = calculateButton;
+			//		inputForm.Controls.Add(calculateButton);
+
+			//		inputForm.ShowDialog();
+			//	}
+			//}
 
 
 
