@@ -233,7 +233,7 @@ HighlightEmptyCells(dataGridView1, columnsToCheck);
 		private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
 		{
 			// Проверяем, что клик был совершен по существующей строке и по 15-му столбцу (индекс 14)
-			if (e.RowIndex >= 0 && columnsToCheck.Contains(e.ColumnIndex))
+			if (e.RowIndex >= 0 && e.ColumnIndex == 7)
 			{
 				// Получаем текущую строку
 				DataGridViewRow selectedRow = dataGridView1.Rows[e.RowIndex];
@@ -243,6 +243,22 @@ HighlightEmptyCells(dataGridView1, columnsToCheck);
 				var Correction_Mat_Value = selectedRow.Cells["Gal_Line_1_Correction_Mat"].Value;
 				var Correction_Score_Value = selectedRow.Cells["Gal_Line_1_Correction_Score"].Value;
 				var СommentValue = selectedRow.Cells["Сomment"].Value;
+
+
+				var startValue = selectedRow.Cells["Start_corr"].Value;
+				bool isStart = startValue != null &&
+										  startValue != DBNull.Value &&
+										  !(startValue is string strstart && string.IsNullOrWhiteSpace(strstart));
+
+				if (!isStart)
+				{
+					MessageBox.Show("Нельзя выполнить корректировку без начала ее выполнения! Редактирование недоступно.",
+									"Информация",
+									MessageBoxButtons.OK,
+									MessageBoxIcon.Information);
+					return;
+				}
+
 
 				// Проверяем, что "Completed" пустой (null, DBNull или пустая строка)
 				bool isCompletedEmpty = completedValue == null ||
@@ -373,20 +389,7 @@ HighlightEmptyCells(dataGridView1, columnsToCheck);
 				var СommentValue = selectedRow.Cells["Сomment"].Value;
 
 
-				var startValue = selectedRow.Cells["Start_corr"].Value;
-				bool isStart = startValue != null &&
-										  startValue != DBNull.Value &&
-										  !(startValue is string strstart && string.IsNullOrWhiteSpace(strstart));
-
-				if (!isStart)
-				{
-					MessageBox.Show("Нельзя выполнить корректировку без начала ее выполнения! Редактирование недоступно.",
-									"Информация",
-									MessageBoxButtons.OK,
-									MessageBoxIcon.Information);
-					return;
-				}
-
+				
 
 				// Проверяем, что "Completed" пустой (null, DBNull или пустая строка)
 				bool isCompletedEmpty = completedValue == null ||

@@ -55,6 +55,7 @@ namespace Rez_Lab.Pryam_Metal_Cond
 				dataGridView1.Columns["Pr_Met_1_Cu2"].HeaderText = "Cu 2+";
 				dataGridView1.Columns["Pr_Met_1_Correction_Mat"].HeaderText = "Корректировка Материал";
 				dataGridView1.Columns["Pr_Met_1_Correction_Score"].HeaderText = "Корректировка Количество";
+				dataGridView1.Columns["Pr_Met_1_ProshDM2"].HeaderText = "Прошедшие дм²";
 
 
 				//
@@ -266,6 +267,7 @@ dataGridView1.Columns["Сomment"].HeaderText = "Комментарий";
 				var Pr_Met_1_Cu2 = dataGridView1.Rows[e.RowIndex].Cells["Pr_Met_1_Cu2"].Value;
 				var Pr_Met_1_Correction_Mat = dataGridView1.Rows[e.RowIndex].Cells["Pr_Met_1_Correction_Mat"].Value;
 				var Pr_Met_1_Correction_Score = dataGridView1.Rows[e.RowIndex].Cells["Pr_Met_1_Correction_Score"].Value;
+				var Pr_Met_1_ProshDM2 = dataGridView1.Rows[e.RowIndex].Cells["Pr_Met_1_ProshDM2"].Value;
 
 				
 
@@ -291,7 +293,8 @@ var Сomment = dataGridView1.Rows[e.RowIndex].Cells["Сomment"].Value;
       ,[Pr_Met_1_PM302] = @Pr_Met_1_PM302, 
 [Pr_Met_1_Cu2] = @Pr_Met_1_Cu2, 
 [Pr_Met_1_Correction_Mat] = @Pr_Met_1_Correction_Mat,
-[Pr_Met_1_Correction_Score] = @Pr_Met_1_Correction_Score
+[Pr_Met_1_Correction_Score] = @Pr_Met_1_Correction_Score,
+[Pr_Met_1_ProshDM2] = @Pr_Met_1_ProshDM2
       ,[FIO_tech] = @FIO_tech
 ,[Date_tech] = @Date_tech
 ,[FIO_Lab_Update] = @FIO_Lab_Update
@@ -315,6 +318,7 @@ var Сomment = dataGridView1.Rows[e.RowIndex].Cells["Сomment"].Value;
 					command.Parameters.AddWithValue("@Pr_Met_1_Cu2", Pr_Met_1_Cu2);
 					command.Parameters.AddWithValue("@Pr_Met_1_Correction_Mat", Pr_Met_1_Correction_Mat);
 					command.Parameters.AddWithValue("@Pr_Met_1_Correction_Score", Pr_Met_1_Correction_Score);
+					command.Parameters.AddWithValue("@Pr_Met_1_ProshDM2", Pr_Met_1_ProshDM2);
 					
 					//
 					command.Parameters.AddWithValue("@FIO_tech", FIO_tech);

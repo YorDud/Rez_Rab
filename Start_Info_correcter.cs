@@ -255,7 +255,7 @@ AND (
 		{
 			string query = @"
         SELECT COUNT(*) 
-FROM Snatie_Photorez 
+FROM Snatie_Photorez_2 
 WHERE ([Сompleted] IS NULL OR [Сompleted] = '') 
 AND (
     ([Sn_Photorez_1_Correction] IS NOT NULL AND [Sn_Photorez_1_Correction] <> '') OR ([Сomment] IS NOT NULL AND [Сomment] <> '') OR 

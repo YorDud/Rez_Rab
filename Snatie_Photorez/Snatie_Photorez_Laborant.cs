@@ -30,7 +30,7 @@ namespace Rez_Lab.Snatie_Photorez
 			using (SqlConnection connection = new SqlConnection(WC.ConnectionString))
 			{
 				connection.Open();
-				dataAdapter = new SqlDataAdapter("SELECT * FROM Snatie_Photorez ORDER BY Date_Create DESC", connection);
+				dataAdapter = new SqlDataAdapter("SELECT * FROM Snatie_Photorez_2 ORDER BY Date_Create DESC", connection);
 				SqlCommandBuilder commandBuilder = new SqlCommandBuilder(dataAdapter);
 				dataTable = new DataTable();
 				dataAdapter.Fill(dataTable);
@@ -42,13 +42,13 @@ namespace Rez_Lab.Snatie_Photorez
 				dataGridView1.Columns["Date_Create"].HeaderText = "Дата создания";
 				dataGridView1.Columns["FIO_Lab"].HeaderText = "ФИО Создателя";
 				//
-				dataGridView1.Columns["Sn_Photorez_1_MS358A"].HeaderText = "Мод.1 MS-358A";
+				dataGridView1.Columns["Sn_Photorez_1_MS358A"].HeaderText = "Мод.1 СНФ-725";
 				dataGridView1.Columns["Sn_Photorez_1_Correction"].HeaderText = "Корректировка Мод.1";
 
-				dataGridView1.Columns["Sn_Photorez_2_MS358A"].HeaderText = "Мод.2 MS-358A";
+				dataGridView1.Columns["Sn_Photorez_2_MS358A"].HeaderText = "Мод.2 СНФ-725";
 				dataGridView1.Columns["Sn_Photorez_2_Correction"].HeaderText = "Корректировка Мод.2";
 
-				dataGridView1.Columns["Sn_Photorez_3_MS358A"].HeaderText = "Бак MS-358A";
+				dataGridView1.Columns["Sn_Photorez_3_MS358A"].HeaderText = "Бак СНФ-725";
 				dataGridView1.Columns["Sn_Photorez_3_Correction"].HeaderText = "Корректировка Бак";
 				//
 				dataGridView1.Columns["FIO_tech"].HeaderText = "ФИО Технолога";
@@ -102,7 +102,7 @@ dataGridView1.Columns["Сomment"].HeaderText = "Комментарий";
 			{
 				connection.Open();
 
-				string query = "SELECT * FROM Snatie_Photorez WHERE CAST(Date_Create AS DATE) = @SelectedDate ORDER BY Date_Create DESC";
+				string query = "SELECT * FROM Snatie_Photorez_2 WHERE CAST(Date_Create AS DATE) = @SelectedDate ORDER BY Date_Create DESC";
 				using (SqlCommand command = new SqlCommand(query, connection))
 				{
 					command.Parameters.AddWithValue("@SelectedDate", date);
@@ -174,7 +174,7 @@ dataGridView1.Columns["Сomment"].HeaderText = "Комментарий";
 			using (SqlConnection connection = new SqlConnection(WC.ConnectionString))
 			{
 				connection.Open();
-				string query = "SELECT * FROM Snatie_Photorez WHERE CAST(Date_Create AS DATE) BETWEEN @StartDate AND @EndDate ORDER BY Date_Create DESC";
+				string query = "SELECT * FROM Snatie_Photorez_2 WHERE CAST(Date_Create AS DATE) BETWEEN @StartDate AND @EndDate ORDER BY Date_Create DESC";
 				using (SqlCommand command = new SqlCommand(query, connection))
 				{
 					command.Parameters.AddWithValue("@StartDate", startDate);
@@ -195,7 +195,7 @@ dataGridView1.Columns["Сomment"].HeaderText = "Комментарий";
 			{
 				connection.Open();
 
-				string sqlInsert = "INSERT INTO Snatie_Photorez ([Date_Create],[FIO_Lab]) " +
+				string sqlInsert = "INSERT INTO Snatie_Photorez_2 ([Date_Create],[FIO_Lab]) " +
 								   "VALUES (@Date_Create, @FIO_Lab)";
 
 				using (SqlCommand command = new SqlCommand(sqlInsert, connection))
@@ -235,7 +235,7 @@ dataGridView1.Columns["Сomment"].HeaderText = "Комментарий";
 
 				// Создаем команду обновления с несколькими столбцами
 				string updateQuery = @"
-            UPDATE Snatie_Photorez
+            UPDATE Snatie_Photorez_2
    SET [Sn_Photorez_1_MS358A] = @Sn_Photorez_1_MS358A,
 [Sn_Photorez_2_MS358A] = @Sn_Photorez_2_MS358A,
 [Sn_Photorez_3_MS358A] = @Sn_Photorez_3_MS358A
@@ -340,7 +340,7 @@ dataGridView1.Columns["Сomment"].HeaderText = "Комментарий";
 
 				// Создаем команду обновления с несколькими столбцами
 				string updateQuery = @"
-            UPDATE Snatie_Photorez
+            UPDATE Snatie_Photorez_2
    SET [Sn_Photorez_1_MS358A] = @Sn_Photorez_1_MS358A,
 [Sn_Photorez_2_MS358A] = @Sn_Photorez_2_MS358A,
 [Sn_Photorez_3_MS358A] = @Sn_Photorez_3_MS358A
@@ -395,11 +395,12 @@ dataGridView1.Columns["Сomment"].HeaderText = "Комментарий";
 					inputForm.MaximizeBox = false;
 					inputForm.MinimizeBox = false;
 					inputForm.StartPosition = FormStartPosition.CenterParent;
-					inputForm.Text = "MS-358A";
+					inputForm.Text = "СНФ-725";
 
 					Label labelValue1 = new Label()
 					{
-						Text = "C(MS-358A) = a * 1,13",
+						Text = "C(СНФ-725) = V * 8",
+						//Text = "C(СНФ-725) = a * 1,13",
 						Top = 10,
 						Left = 30,
 						Width = 330
@@ -407,7 +408,8 @@ dataGridView1.Columns["Сomment"].HeaderText = "Комментарий";
 
 					Label labelValueA = new Label()
 					{
-						Text = "а - количество 0,1Н сол. кислоты, израсход. на титров., мл\r\n",
+						Text = "V - обьем титранта, мл\r\n",
+						//Text = "а - количество 0,1Н сол. кислоты, израсход. на титров., мл\r\n",
 						Top = 40,
 						Left = 10,
 						Width = 330,
@@ -416,7 +418,8 @@ dataGridView1.Columns["Сomment"].HeaderText = "Комментарий";
 
 					Label labelValue2 = new Label()
 					{
-						Text = "а:",
+						Text = "V:",
+						//Text = "а:",
 						Top = 150,
 						Left = 10,
 						Width = 100
@@ -476,7 +479,7 @@ dataGridView1.Columns["Сomment"].HeaderText = "Комментарий";
 						// Валидация и получение значений
 						if (double.TryParse(value1.Text, out double v1))
 						{
-							double result = Math.Round(v1 * 1.13, 2); // Пример формулы (сложение)
+							double result = Math.Round(v1 * 8, 2); // Пример формулы (сложение)
 
 							// Запись результата в выбранную ячейку
 							dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = result;
@@ -518,11 +521,12 @@ dataGridView1.Columns["Сomment"].HeaderText = "Комментарий";
 					inputForm.MaximizeBox = false;
 					inputForm.MinimizeBox = false;
 					inputForm.StartPosition = FormStartPosition.CenterParent;
-					inputForm.Text = "MS-358A";
+					inputForm.Text = "СНФ-725";
 
 					Label labelValue1 = new Label()
 					{
-						Text = "C(MS-358A) = a * 1,13",
+						Text = "C(СНФ-725) = V * 8",
+						//Text = "C(СНФ-725) = a * 1,13",
 						Top = 10,
 						Left = 30,
 						Width = 330
@@ -530,7 +534,8 @@ dataGridView1.Columns["Сomment"].HeaderText = "Комментарий";
 
 					Label labelValueA = new Label()
 					{
-						Text = "а - количество 0,1Н сол. кислоты, израсход. на титров., мл\r\n",
+						Text = "V - обьем титранта, мл\r\n",
+						//Text = "а - количество 0,1Н сол. кислоты, израсход. на титров., мл\r\n",
 						Top = 40,
 						Left = 10,
 						Width = 330,
@@ -539,7 +544,8 @@ dataGridView1.Columns["Сomment"].HeaderText = "Комментарий";
 
 					Label labelValue2 = new Label()
 					{
-						Text = "а:",
+						Text = "V:",
+						//Text = "а:",
 						Top = 150,
 						Left = 10,
 						Width = 100
@@ -599,7 +605,7 @@ dataGridView1.Columns["Сomment"].HeaderText = "Комментарий";
 						// Валидация и получение значений
 						if (double.TryParse(value1.Text, out double v1))
 						{
-							double result = Math.Round(v1 * 1.13, 2); // Пример формулы (сложение)
+							double result = Math.Round(v1 * 8, 2); // Пример формулы (сложение)
 
 							// Запись результата в выбранную ячейку
 							dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = result;
@@ -641,11 +647,12 @@ dataGridView1.Columns["Сomment"].HeaderText = "Комментарий";
 					inputForm.MaximizeBox = false;
 					inputForm.MinimizeBox = false;
 					inputForm.StartPosition = FormStartPosition.CenterParent;
-					inputForm.Text = "MS-358A";
+					inputForm.Text = "СНФ-725";
 
 					Label labelValue1 = new Label()
 					{
-						Text = "C(MS-358A) = a * 1,13",
+						Text = "C(СНФ-725) = V * 8",
+						//Text = "C(СНФ-725) = a * 1,13",
 						Top = 10,
 						Left = 30,
 						Width = 330
@@ -653,7 +660,8 @@ dataGridView1.Columns["Сomment"].HeaderText = "Комментарий";
 
 					Label labelValueA = new Label()
 					{
-						Text = "а - количество 0,1Н сол. кислоты, израсход. на титров., мл\r\n",
+						Text = "V - обьем титранта, мл\r\n",
+						//Text = "а - количество 0,1Н сол. кислоты, израсход. на титров., мл\r\n",
 						Top = 40,
 						Left = 10,
 						Width = 330,
@@ -662,7 +670,8 @@ dataGridView1.Columns["Сomment"].HeaderText = "Комментарий";
 
 					Label labelValue2 = new Label()
 					{
-						Text = "а:",
+						Text = "V:",
+						//Text = "а:",
 						Top = 150,
 						Left = 10,
 						Width = 100
@@ -722,7 +731,7 @@ dataGridView1.Columns["Сomment"].HeaderText = "Комментарий";
 						// Валидация и получение значений
 						if (double.TryParse(value1.Text, out double v1))
 						{
-							double result = Math.Round(v1 * 1.13, 2); // Пример формулы (сложение)
+							double result = Math.Round(v1 * 8, 2); // Пример формулы (сложение)
 
 							// Запись результата в выбранную ячейку
 							dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = result;
@@ -799,7 +808,7 @@ dataGridView1.Columns["Сomment"].HeaderText = "Комментарий";
 
 				// Создаем команду обновления с несколькими столбцами
 				string updateQuery = @"
-            UPDATE Snatie_Photorez
+            UPDATE Snatie_Photorez_2
    SET [Sn_Photorez_1_MS358A] = @Sn_Photorez_1_MS358A,
 [Sn_Photorez_2_MS358A] = @Sn_Photorez_2_MS358A,
 [Sn_Photorez_3_MS358A] = @Sn_Photorez_3_MS358A

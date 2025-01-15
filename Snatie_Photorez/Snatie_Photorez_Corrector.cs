@@ -18,7 +18,7 @@ namespace Rez_Lab.Snatie_Photorez
 		public Snatie_Photorez_Corrector()
 		{
 			InitializeComponent();
-			//label3.Text = "Снятие фоторезиста:\r\nМодуль 1 - MS-358A - 8 - 12 %\r\nМодуль 2-3 - MS-358A - 8 - 12 %\r\nБак - MS-358 A - 8 - 12 %\r\nОБЪЕМ ВАННЫ: Модуль 1 - 465 л; Модуль 2-3 - 450+80 л";
+			//label3.Text = "Снятие фоторезиста:\r\nМодуль 1 - СНФ-725 - 8 - 12 %\r\nМодуль 2-3 - MS-358A - 8 - 12 %\r\nБак - MS-358 A - 8 - 12 %\r\nОБЪЕМ ВАННЫ: Модуль 1 - 465 л; Модуль 2-3 - 450+80 л";
 
 		}
 
@@ -32,7 +32,7 @@ namespace Rez_Lab.Snatie_Photorez
 			using (SqlConnection connection = new SqlConnection(WC.ConnectionString))
 			{
 				connection.Open();
-				dataAdapter = new SqlDataAdapter("SELECT ID, Sn_Photorez_1_Correction, Sn_Photorez_2_Correction, Sn_Photorez_3_Correction, FIO_tech, Date_tech, FIO_Corr, Date_Corr, Сompleted,[Start_corr],[Date_start_corr],[FIO_start_corr],[Сomment] FROM Snatie_Photorez ORDER BY Date_Create DESC", connection);
+				dataAdapter = new SqlDataAdapter("SELECT ID, Sn_Photorez_1_Correction, Sn_Photorez_2_Correction, Sn_Photorez_3_Correction, FIO_tech, Date_tech, FIO_Corr, Date_Corr, Сompleted,[Start_corr],[Date_start_corr],[FIO_start_corr],[Сomment] FROM Snatie_Photorez_2 ORDER BY Date_Create DESC", connection);
 				SqlCommandBuilder commandBuilder = new SqlCommandBuilder(dataAdapter);
 				dataTable = new DataTable();
 				dataAdapter.Fill(dataTable);
@@ -117,7 +117,7 @@ HighlightEmptyCells(dataGridView1, columnsToCheck);
 			{
 				connection.Open();
 
-				string query = "SELECT ID, Sn_Photorez_1_Correction, Sn_Photorez_2_Correction, Sn_Photorez_3_Correction, FIO_tech, Date_tech, FIO_Corr, Date_Corr, Сompleted,[Start_corr],[Date_start_corr],[FIO_start_corr],[Сomment] FROM Snatie_Photorez WHERE CAST(Date_Create AS DATE) = @SelectedDate ORDER BY Date_Create DESC";
+				string query = "SELECT ID, Sn_Photorez_1_Correction, Sn_Photorez_2_Correction, Sn_Photorez_3_Correction, FIO_tech, Date_tech, FIO_Corr, Date_Corr, Сompleted,[Start_corr],[Date_start_corr],[FIO_start_corr],[Сomment] FROM Snatie_Photorez_2 WHERE CAST(Date_Create AS DATE) = @SelectedDate ORDER BY Date_Create DESC";
 				using (SqlCommand command = new SqlCommand(query, connection))
 				{
 					command.Parameters.AddWithValue("@SelectedDate", date);
@@ -221,7 +221,7 @@ HighlightEmptyCells(dataGridView1, columnsToCheck);
 			using (SqlConnection connection = new SqlConnection(WC.ConnectionString))
 			{
 				connection.Open();
-				string query = "SELECT ID, Sn_Photorez_1_Correction, Sn_Photorez_2_Correction, Sn_Photorez_3_Correction, FIO_tech, Date_tech, FIO_Corr, Date_Corr, Сompleted,[Start_corr],[Date_start_corr],[FIO_start_corr],[Сomment] FROM Snatie_Photorez WHERE CAST(Date_Create AS DATE) BETWEEN @StartDate AND @EndDate ORDER BY Date_Create DESC";
+				string query = "SELECT ID, Sn_Photorez_1_Correction, Sn_Photorez_2_Correction, Sn_Photorez_3_Correction, FIO_tech, Date_tech, FIO_Corr, Date_Corr, Сompleted,[Start_corr],[Date_start_corr],[FIO_start_corr],[Сomment] FROM Snatie_Photorez_2 WHERE CAST(Date_Create AS DATE) BETWEEN @StartDate AND @EndDate ORDER BY Date_Create DESC";
 				using (SqlCommand command = new SqlCommand(query, connection))
 				{
 					command.Parameters.AddWithValue("@StartDate", startDate);
@@ -318,7 +318,7 @@ HighlightEmptyCells(dataGridView1, columnsToCheck);
 						// Подготовка SQL-запроса для обновления
 						string completed = "Выполнено!";
 						string connectionString = WC.ConnectionString;
-						string query = @"UPDATE Snatie_Photorez SET 
+						string query = @"UPDATE Snatie_Photorez_2 SET 
                                  [Date_Corr] = @Date_Corr,
                                  [Сompleted] = @Сompleted,
                                  [FIO_Corr] = @FIO_Corr
@@ -451,7 +451,7 @@ HighlightEmptyCells(dataGridView1, columnsToCheck);
 						// Подготовка SQL-запроса для обновления
 						string completed = "В работе";
 						string connectionString = WC.ConnectionString;
-						string query = @"UPDATE Snatie_Photorez SET 
+						string query = @"UPDATE Snatie_Photorez_2 SET 
                                  [Date_start_corr] = @Date_start_corr,
                                  [Start_corr] = @Start_corr,
                                  [FIO_start_corr] = @FIO_start_corr
@@ -580,12 +580,12 @@ HighlightEmptyCells(dataGridView1, columnsToCheck);
                 [Sn_Photorez_3_Correction],
                 [Сomment]
             FROM 
-                Snatie_Photorez
+                Snatie_Photorez_2
             WHERE 
                 ([Сompleted] IS NULL OR [Сompleted] = '') 
                 AND (
                     ([Sn_Photorez_1_Correction] IS NOT NULL AND [Sn_Photorez_1_Correction] <> '') 
-                    OR ([Сomment] IS NOT NULL AND [Сomment] <> '') OR ([Sn_Photorez_2_Correction] IS NOT NULL AND [Sn_Photorez_3_Correction] <> '')
+                    OR ([Сomment] IS NOT NULL AND [Сomment] <> '') OR ([Sn_Photorez_2_Correction] IS NOT NULL AND [Sn_Photorez_2_Correction] <> '')
                     OR ([Sn_Photorez_3_Correction] IS NOT NULL AND [Sn_Photorez_3_Correction] <> '')
                 );
         ";

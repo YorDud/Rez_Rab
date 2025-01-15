@@ -791,129 +791,129 @@ dataGridView1.Columns["Сomment"].HeaderText = "Комментарий";
 					inputForm.ShowDialog();
 				}
 			}
-			else if (e.RowIndex >= 0 && e.ColumnIndex == 9) // Проверяем, что ячейка выбрана
-			{
-				// Открытие диалогового окна
-				// Открытие диалогового окна
-				using (Form inputForm = new Form())
-				{
-					// Установка размеров формы
-					inputForm.Width = 350;
-					inputForm.Height = 300;
-					inputForm.FormBorderStyle = FormBorderStyle.FixedDialog;
-					inputForm.MaximizeBox = false;
-					inputForm.MinimizeBox = false;
-					inputForm.StartPosition = FormStartPosition.CenterParent;
-					inputForm.Text = "ПО 402Б";
+			//else if (e.RowIndex >= 0 && e.ColumnIndex == 9) // Проверяем, что ячейка выбрана
+			//{
+			//	// Открытие диалогового окна
+			//	// Открытие диалогового окна
+			//	using (Form inputForm = new Form())
+			//	{
+			//		// Установка размеров формы
+			//		inputForm.Width = 350;
+			//		inputForm.Height = 300;
+			//		inputForm.FormBorderStyle = FormBorderStyle.FixedDialog;
+			//		inputForm.MaximizeBox = false;
+			//		inputForm.MinimizeBox = false;
+			//		inputForm.StartPosition = FormStartPosition.CenterParent;
+			//		inputForm.Text = "ПО 402Б";
 
-					Label labelValue1 = new Label()
-					{
-						Text = "С(402Б) = a * 13.3",
-						Top = 10,
-						Left = 30,
-						Width = 330
-					};
+			//		Label labelValue1 = new Label()
+			//		{
+			//			Text = "С(402Б) = a * 13.3",
+			//			Top = 10,
+			//			Left = 30,
+			//			Width = 330
+			//		};
 
-					Label labelValueA = new Label()
-					{
-						Text = "а - количество 1Н раств. серной кислоты, израсход. на титров., мл\r\n",
-						Top = 40,
-						Left = 10,
-						Width = 330,
-						Height = 100
-					};
+			//		Label labelValueA = new Label()
+			//		{
+			//			Text = "а - количество 1Н раств. серной кислоты, израсход. на титров., мл\r\n",
+			//			Top = 40,
+			//			Left = 10,
+			//			Width = 330,
+			//			Height = 100
+			//		};
 
-					Label labelValue2 = new Label()
-					{
-						Text = "а:",
-						Top = 150,
-						Left = 10,
-						Width = 100
-					};
+			//		Label labelValue2 = new Label()
+			//		{
+			//			Text = "а:",
+			//			Top = 150,
+			//			Left = 10,
+			//			Width = 100
+			//		};
 
 
-					// Создание и настройка текстовых полей
-					TextBox value1 = new TextBox
-					{
-						Top = 150,
-						Left = 30,
-						Width = 100
-					};
-					Label labelValue3 = new Label()
-					{
-						Text = "V:",
-						Top = 180,
-						Left = 10,
-						Width = 100
-					};
+			//		// Создание и настройка текстовых полей
+			//		TextBox value1 = new TextBox
+			//		{
+			//			Top = 150,
+			//			Left = 30,
+			//			Width = 100
+			//		};
+			//		Label labelValue3 = new Label()
+			//		{
+			//			Text = "V:",
+			//			Top = 180,
+			//			Left = 10,
+			//			Width = 100
+			//		};
 
-					TextBox value2 = new TextBox
-					{
-						Top = 180,
-						Left = 30,
-						Width = 100
-					};
-					Label labelValue4 = new Label()
-					{
-						Text = "V:",
-						Top = 150,
-						Left = 175,
-						Width = 20
-					};
+			//		TextBox value2 = new TextBox
+			//		{
+			//			Top = 180,
+			//			Left = 30,
+			//			Width = 100
+			//		};
+			//		Label labelValue4 = new Label()
+			//		{
+			//			Text = "V:",
+			//			Top = 150,
+			//			Left = 175,
+			//			Width = 20
+			//		};
 
-					TextBox value3 = new TextBox
-					{
-						Top = 150,
-						Left = 200,
-						Width = 100
-					};
+			//		TextBox value3 = new TextBox
+			//		{
+			//			Top = 150,
+			//			Left = 200,
+			//			Width = 100
+			//		};
 
-					// Добавление обработчиков событий для ограничения ввода только числами
-					value1.KeyPress += NumericTextBox_KeyPress;
-					value2.KeyPress += NumericTextBox_KeyPress;
+			//		// Добавление обработчиков событий для ограничения ввода только числами
+			//		value1.KeyPress += NumericTextBox_KeyPress;
+			//		value2.KeyPress += NumericTextBox_KeyPress;
 
-					// Создание и настройка кнопки
-					Button calculateButton = new Button
-					{
-						Text = "Вычислить",
-						Top = 220,
-						Left = 10,
-						Width = 290
-					};
-					calculateButton.Click += (s, args) =>
-					{
-						// Валидация и получение значений
-						if (double.TryParse(value1.Text, out double v1))
-						{
-							double result = Math.Round(v1 * 13.3, 2); // Пример формулы (сложение)
+			//		// Создание и настройка кнопки
+			//		Button calculateButton = new Button
+			//		{
+			//			Text = "Вычислить",
+			//			Top = 220,
+			//			Left = 10,
+			//			Width = 290
+			//		};
+			//		calculateButton.Click += (s, args) =>
+			//		{
+			//			// Валидация и получение значений
+			//			if (double.TryParse(value1.Text, out double v1))
+			//			{
+			//				double result = Math.Round(v1 * 13.3, 2); // Пример формулы (сложение)
 
-							// Запись результата в выбранную ячейку
-							dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = result;
+			//				// Запись результата в выбранную ячейку
+			//				dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = result;
 
-							// Обновление базы данных
-							UpdateDatabase(e.RowIndex, e.ColumnIndex, result, sender, e);
+			//				// Обновление базы данных
+			//				UpdateDatabase(e.RowIndex, e.ColumnIndex, result, sender, e);
 
-							inputForm.Close();
-						}
-						else
-						{
-							MessageBox.Show("Пожалуйста, введите корректные числовые значения.", "Некорректный ввод", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-						}
-					};
+			//				inputForm.Close();
+			//			}
+			//			else
+			//			{
+			//				MessageBox.Show("Пожалуйста, введите корректные числовые значения.", "Некорректный ввод", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+			//			}
+			//		};
 
-					// Добавление элементов на форму
-					inputForm.Controls.Add(value1);
-					inputForm.Controls.Add(labelValue1);
-					inputForm.Controls.Add(labelValueA);
-					inputForm.Controls.Add(labelValue2);
-					//inputForm.Controls.Add(value2);
-					//inputForm.Controls.Add(labelValue3);
-					inputForm.AcceptButton = calculateButton;
-					inputForm.Controls.Add(calculateButton);
+			//		// Добавление элементов на форму
+			//		inputForm.Controls.Add(value1);
+			//		inputForm.Controls.Add(labelValue1);
+			//		inputForm.Controls.Add(labelValueA);
+			//		inputForm.Controls.Add(labelValue2);
+			//		//inputForm.Controls.Add(value2);
+			//		//inputForm.Controls.Add(labelValue3);
+			//		inputForm.AcceptButton = calculateButton;
+			//		inputForm.Controls.Add(calculateButton);
 
-					inputForm.ShowDialog();
-				}
-			}
+			//		inputForm.ShowDialog();
+			//	}
+			//}
 			else if (e.RowIndex >= 0 && e.ColumnIndex == 10) // Проверяем, что ячейка выбрана
 			{
 				// Открытие диалогового окна

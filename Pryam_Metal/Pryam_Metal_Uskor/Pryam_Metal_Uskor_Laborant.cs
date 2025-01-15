@@ -48,6 +48,7 @@ namespace Rez_Lab.Black_Hole
 
 				dataGridView1.Columns["Pr_Met_4_Correction_Mat"].HeaderText = "Корректировка Материал";
 				dataGridView1.Columns["Pr_Met_4_Correction_Score"].HeaderText = "Корректировка Количество";
+				dataGridView1.Columns["Pr_Met_4_ProshDM2"].HeaderText = "Прошедшие дм²";
 
 
 				//

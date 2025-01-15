@@ -254,10 +254,10 @@
 			// 
 			this.pictureBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.pictureBox2.Image = global::Rez_Lab.Properties.Resources.Tab_Uskor;
-			this.pictureBox2.Location = new System.Drawing.Point(695, 73);
+			this.pictureBox2.Location = new System.Drawing.Point(709, 73);
 			this.pictureBox2.Name = "pictureBox2";
-			this.pictureBox2.Size = new System.Drawing.Size(791, 322);
-			this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+			this.pictureBox2.Size = new System.Drawing.Size(777, 313);
+			this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
 			this.pictureBox2.TabIndex = 142;
 			this.pictureBox2.TabStop = false;
 			this.pictureBox2.Visible = false;

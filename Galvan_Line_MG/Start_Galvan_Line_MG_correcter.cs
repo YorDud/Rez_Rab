@@ -2411,14 +2411,14 @@ AND (
 		private System.Drawing.Font dateFont = new System.Drawing.Font("Arial", 14, FontStyle.Bold);
 		private readonly string[] tableHeaders = new string[]
 		{
-		"!!! Кислая очистка !!!",
-		"!!! Микротравление !!!",
-		"!!! Декапир Сu !!!",
-		"!!! Декапир Sn !!!",
-		"!!! Cu электролит (ванна 18-19) !!!",
-		"!!! Cu электролит (ванна 20-21) !!!",
-		"!!! Sn электролит !!!",
-		"!!! Травление подвесок !!!"
+		"!!! Cleaner    Кислая очистка !!!",
+		"!!! Micro-Etch    Микротравление !!! ",
+		"!!! Pre-Dip Cu     Декапир Сu !!!",
+		"!!! Pre-Dip Sn     Декапир Sn !!!",
+		"!!! Plating Cu (ванна 18-19)    Cu электролит !!!",
+		"!!! Plating Cu (ванна 20-21)    Cu электролит !!!",
+		"!!! Plating Sn     Sn электролит !!!",
+		"!!! Rach-Strip    Травление подвесок !!!"
 		};
 		private int currentTableIndex = 0;
 		private int currentRowIndex = 0;

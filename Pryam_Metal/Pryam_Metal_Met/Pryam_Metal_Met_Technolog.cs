@@ -52,6 +52,7 @@ namespace Rez_Lab.Black_Hole
 				dataGridView1.Columns["Pr_Met_3_Cu2"].HeaderText = "Cu 2+";
 				dataGridView1.Columns["Pr_Met_3_Correction_Mat"].HeaderText = "Корректировка материал";
 				dataGridView1.Columns["Pr_Met_3_Correction_Score"].HeaderText = "Корректировка количество";
+				dataGridView1.Columns["Pr_Met_3_ProshDM2"].HeaderText = "Прошедшие дм²";
 				//
 				dataGridView1.Columns["FIO_tech"].HeaderText = "ФИО Технолога";
 				dataGridView1.Columns["Date_tech"].HeaderText = "Дата создания корректировки";
@@ -156,7 +157,7 @@ dataGridView1.Columns["Сomment"].HeaderText = "Комментарий";
 		{
 			foreach (DataGridViewColumn column in dataGridView1.Columns)
 			{
-				if (column.Name != "Pr_Met_3_Correction_Score" && column.Name != "Pr_Met_3_Correction_Mat" && column.Name != "Сomment") // предполагается, что "ID" - это столбец, который можно редактировать
+				if (column.Name != "Pr_Met_3_Correction_Score" && column.Name != "Pr_Met_3_Correction_Mat" && column.Name != "Сomment"  && column.Name != "Pr_Met_3_ProshDM2") // предполагается, что "ID" - это столбец, который можно редактировать
 				{
 					column.ReadOnly = true;
 				}
@@ -190,6 +191,7 @@ dataGridView1.Columns["Сomment"].HeaderText = "Комментарий";
 				var Pr_Met_3_SnCl2 = dataGridView1.Rows[e.RowIndex].Cells["Pr_Met_3_SnCl2"].Value;
 				var Pr_Met_3_Correction_Mat = dataGridView1.Rows[e.RowIndex].Cells["Pr_Met_3_Correction_Mat"].Value;
 				var Pr_Met_3_Correction_Score = dataGridView1.Rows[e.RowIndex].Cells["Pr_Met_3_Correction_Score"].Value;
+				var Pr_Met_3_ProshDM2 = dataGridView1.Rows[e.RowIndex].Cells["Pr_Met_3_ProshDM2"].Value;
 
 				var Comment = dataGridView1.Rows[e.RowIndex].Cells["Сomment"].Value;
 
@@ -203,7 +205,8 @@ dataGridView1.Columns["Сomment"].HeaderText = "Комментарий";
 [Pr_Met_3_HCl] = @Pr_Met_3_HCl,
 [Pr_Met_3_SnCl2] = @Pr_Met_3_SnCl2,
 [Pr_Met_3_Correction_Mat] = @Pr_Met_3_Correction_Mat,
-[Pr_Met_3_Correction_Score] = @Pr_Met_3_Correction_Score
+[Pr_Met_3_Correction_Score] = @Pr_Met_3_Correction_Score,
+[Pr_Met_3_ProshDM2] = @Pr_Met_3_ProshDM2
 			,[Сomment] = @Comment
             ,FIO_tech = @FIO_tech
         WHERE ID = @Id";
@@ -218,6 +221,7 @@ dataGridView1.Columns["Сomment"].HeaderText = "Комментарий";
 					command.Parameters.AddWithValue("@Pr_Met_3_SnCl2", Pr_Met_3_SnCl2);
 					command.Parameters.AddWithValue("@Pr_Met_3_Correction_Mat", Pr_Met_3_Correction_Mat);
 					command.Parameters.AddWithValue("@Pr_Met_3_Correction_Score", Pr_Met_3_Correction_Score);
+					command.Parameters.AddWithValue("@Pr_Met_3_ProshDM2", Pr_Met_3_ProshDM2);
 					command.Parameters.AddWithValue("@Comment", Comment);
 
 
@@ -420,7 +424,7 @@ dataGridView1.Columns["Сomment"].HeaderText = "Комментарий";
 		{
 			// Определите индексы столбцов
 			int idColumnIndex = 0; // Индекс столбца ID (измените по необходимости)
-			int dateTechColumnIndex = 10; // Индекс столбца Date_tech (измените по необходимости)
+			int dateTechColumnIndex = 11; // Индекс столбца Date_tech (измените по необходимости)
 
 			// Проходите по всем строкам в DataGridView
 			foreach (DataGridViewRow row in dataGridView.Rows)
@@ -500,6 +504,7 @@ dataGridView1.Columns["Сomment"].HeaderText = "Комментарий";
 				var Pr_Met_3_SnCl2 = dataGridView1.Rows[rowIndex].Cells["Pr_Met_3_SnCl2"].Value;
 				var Pr_Met_3_Correction_Mat = dataGridView1.Rows[rowIndex].Cells["Pr_Met_3_Correction_Mat"].Value;
 				var Pr_Met_3_Correction_Score = dataGridView1.Rows[rowIndex].Cells["Pr_Met_3_Correction_Score"].Value;
+				var Pr_Met_3_ProshDM2 = dataGridView1.Rows[rowIndex].Cells["Pr_Met_3_ProshDM2"].Value;
 				//var Comment = dataGridView1.Rows[e.RowIndex].Cells["Сomment"].Value;
 
 
@@ -511,7 +516,8 @@ dataGridView1.Columns["Сomment"].HeaderText = "Комментарий";
 [Pr_Met_3_HCl] = @Pr_Met_3_HCl,
 [Pr_Met_3_SnCl2] = @Pr_Met_3_SnCl2,
 [Pr_Met_3_Correction_Mat] = @Pr_Met_3_Correction_Mat,
-[Pr_Met_3_Correction_Score] = @Pr_Met_3_Correction_Score
+[Pr_Met_3_Correction_Score] = @Pr_Met_3_Correction_Score,
+[Pr_Met_3_ProshDM2] = @Pr_Met_3_ProshDM2
       ,[Date_Create] = @Date_Create,
                 [FIO_Lab] = @FIO_Lab
 	WHERE ID = @ID";
@@ -527,6 +533,7 @@ dataGridView1.Columns["Сomment"].HeaderText = "Комментарий";
 					command.Parameters.AddWithValue("@Pr_Met_3_SnCl2", Pr_Met_3_SnCl2);
 					command.Parameters.AddWithValue("@Pr_Met_3_Correction_Mat", Pr_Met_3_Correction_Mat);
 					command.Parameters.AddWithValue("@Pr_Met_3_Correction_Score", Pr_Met_3_Correction_Score);
+					command.Parameters.AddWithValue("@Pr_Met_3_ProshDM2", Pr_Met_3_ProshDM2);
 					//
 					command.Parameters.AddWithValue("@ID", id); // ID - это первичный ключ
 
@@ -696,6 +703,7 @@ dataGridView1.Columns["Сomment"].HeaderText = "Комментарий";
 				var Date_tech = DateTime.Now;
 				var Pr_Met_3_Correction_Mat = dataGridView1.Rows[e.RowIndex].Cells["Pr_Met_3_Correction_Mat"].Value;
 				var Pr_Met_3_Correction_Score = dataGridView1.Rows[e.RowIndex].Cells["Pr_Met_3_Correction_Score"].Value;
+				var Pr_Met_3_ProshDM2 = dataGridView1.Rows[e.RowIndex].Cells["Pr_Met_3_ProshDM2"].Value;
 				var Сomment = dataGridView1.Rows[e.RowIndex].Cells["Сomment"].Value;
 				//var Comment = dataGridView1.Rows[e.RowIndex].Cells["Сomment"].Value;
 
@@ -707,6 +715,7 @@ dataGridView1.Columns["Сomment"].HeaderText = "Комментарий";
     [Date_tech] = @Date_tech,
     Pr_Met_3_Correction_Mat = @Pr_Met_3_Correction_Mat,
     Pr_Met_3_Correction_Score = @Pr_Met_3_Correction_Score,
+    Pr_Met_3_ProshDM2 = @Pr_Met_3_ProshDM2,
 	[Сomment] = @Сomment,
     FIO_tech = @FIO_tech
 WHERE ID = @Id";
@@ -718,6 +727,7 @@ WHERE ID = @Id";
 					command.Parameters.AddWithValue("@FIO_tech", FIO_tech);
 					command.Parameters.AddWithValue("@Pr_Met_3_Correction_Mat", Pr_Met_3_Correction_Mat);
 					command.Parameters.AddWithValue("@Pr_Met_3_Correction_Score", Pr_Met_3_Correction_Score);
+					command.Parameters.AddWithValue("@Pr_Met_3_ProshDM2", Pr_Met_3_ProshDM2);
 					command.Parameters.AddWithValue("@Сomment", Сomment);
 					command.Parameters.AddWithValue("@ID", id); // ID - это первичный ключ
 

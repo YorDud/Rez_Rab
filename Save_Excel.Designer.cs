@@ -159,6 +159,7 @@
             "Pryam_Metal_Uskor",
             "Snatie_Olova",
             "Snatie_Photorez",
+            "Snatie_Photorez_2",
             "Trav_Med_1",
             "Amm_Prom",
             "Trav_Med_2"});

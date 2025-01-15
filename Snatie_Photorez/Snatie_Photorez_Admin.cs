@@ -29,7 +29,7 @@ namespace Rez_Lab.Snatie_Photorez
 			using (SqlConnection connection = new SqlConnection(WC.ConnectionString))
 			{
 				connection.Open();
-				dataAdapter = new SqlDataAdapter("SELECT * FROM Snatie_Photorez ORDER BY Date_Create DESC", connection);
+				dataAdapter = new SqlDataAdapter("SELECT * FROM Snatie_Photorez_2 ORDER BY Date_Create DESC", connection);
 				SqlCommandBuilder commandBuilder = new SqlCommandBuilder(dataAdapter);
 				dataTable = new DataTable();
 				dataAdapter.Fill(dataTable);
@@ -41,13 +41,13 @@ namespace Rez_Lab.Snatie_Photorez
 				dataGridView1.Columns["Date_Create"].HeaderText = "Дата создания";
 				dataGridView1.Columns["FIO_Lab"].HeaderText = "ФИО Создателя";
 				//
-				dataGridView1.Columns["Sn_Photorez_1_MS358A"].HeaderText = "Мод.1 MS-358A";
+				dataGridView1.Columns["Sn_Photorez_1_MS358A"].HeaderText = "Мод.1 СНФ-725";
 				dataGridView1.Columns["Sn_Photorez_1_Correction"].HeaderText = "Корректировка Мод.1";
 
-				dataGridView1.Columns["Sn_Photorez_2_MS358A"].HeaderText = "Мод.2 MS-358A";
+				dataGridView1.Columns["Sn_Photorez_2_MS358A"].HeaderText = "Мод.2 СНФ-725";
 				dataGridView1.Columns["Sn_Photorez_2_Correction"].HeaderText = "Корректировка Мод.2";
 
-				dataGridView1.Columns["Sn_Photorez_3_MS358A"].HeaderText = "Бак MS-358A";
+				dataGridView1.Columns["Sn_Photorez_3_MS358A"].HeaderText = "Бак СНФ-725";
 				dataGridView1.Columns["Sn_Photorez_3_Correction"].HeaderText = "Корректировка Бак";
 
 
@@ -111,7 +111,7 @@ dataGridView1.Columns["Сomment"].HeaderText = "Комментарий";
 			{
 				connection.Open();
 
-				string query = "SELECT * FROM Snatie_Photorez WHERE CAST(Date_Create AS DATE) = @SelectedDate ORDER BY Date_Create DESC";
+				string query = "SELECT * FROM Snatie_Photorez_2 WHERE CAST(Date_Create AS DATE) = @SelectedDate ORDER BY Date_Create DESC";
 				using (SqlCommand command = new SqlCommand(query, connection))
 				{
 					command.Parameters.AddWithValue("@SelectedDate", date);
@@ -170,7 +170,7 @@ dataGridView1.Columns["Сomment"].HeaderText = "Комментарий";
 			using (SqlConnection connection = new SqlConnection(WC.ConnectionString))
 			{
 				connection.Open();
-				string query = "SELECT * FROM Snatie_Photorez WHERE CAST(Date_Create AS DATE) BETWEEN @StartDate AND @EndDate ORDER BY Date_Create DESC";
+				string query = "SELECT * FROM Snatie_Photorez_2 WHERE CAST(Date_Create AS DATE) BETWEEN @StartDate AND @EndDate ORDER BY Date_Create DESC";
 				using (SqlCommand command = new SqlCommand(query, connection))
 				{
 					command.Parameters.AddWithValue("@StartDate", startDate);
@@ -206,7 +206,7 @@ dataGridView1.Columns["Сomment"].HeaderText = "Комментарий";
 			{
 				connection.Open();
 
-				string sqlInsert = "INSERT INTO Snatie_Photorez ([Date_Create], [FIO_Lab]) " +
+				string sqlInsert = "INSERT INTO Snatie_Photorez_2 ([Date_Create], [FIO_Lab]) " +
 					 "VALUES (@Date_Create, @FIO_Lab)";
 
 				using (SqlCommand command = new SqlCommand(sqlInsert, connection))
@@ -278,7 +278,7 @@ var Сomment = dataGridView1.Rows[e.RowIndex].Cells["Сomment"].Value;
 
 				// Создаем команду обновления с несколькими столбцами
 				string updateQuery = @"
-            UPDATE Snatie_Photorez
+            UPDATE Snatie_Photorez_2
    SET [Date_Create] = @Date_Create
       ,[FIO_Lab] = @FIO_Lab
       ,[Sn_Photorez_1_MS358A] = @Sn_Photorez_1_MS358A,

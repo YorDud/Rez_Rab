@@ -1211,7 +1211,7 @@ WHERE ([FIO_tech] IS NULL OR [FIO_tech] = '')
 		{
 			string query = @"
         SELECT COUNT(*) 
-FROM Snatie_Photorez 
+FROM Snatie_Photorez_2 
 WHERE ([FIO_tech] IS NULL OR [FIO_tech] = '') 
    OR ([Date_tech] IS NULL OR [Date_tech] = '');";
 
